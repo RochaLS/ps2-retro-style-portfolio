@@ -1,0 +1,43 @@
+.crt {
+    position: relative;
+    filter: contrast(1.2) brightness(0.9) saturate(1.1);
+  }
+  
+  /* Scanline overlay */
+  .crt::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 2px,
+      transparent 3px
+    );
+    mix-blend-mode: screen;
+    opacity: 0.25;
+  }
+  
+  /* Glow flicker layer */
+  .crt::after {
+    content: \"\";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255,255,255,0.03), transparent 70%);
+    animation: crt-flicker 60ms infinite;
+  }
+  
+  @keyframes crt-flicker {
+    0%   { opacity: 0.1; }
+    50%  { opacity: 0.2; }
+    100% { opacity: 0.1; }
+  }
+
+  .crt > * {
+    position: relative;
+    z-index: 1;
+    mix-blend-mode: screen;
+  }
