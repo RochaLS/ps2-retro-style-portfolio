@@ -1,29 +1,51 @@
+import { useEffect, useState } from "react";
 import type { Project } from "../data/projects";
 
 interface ProjectBoxProps {
     project: Project
     selected: boolean
+    index: number
+    onHover: (i: number) => void
 }
 
 
 
-export function ProjectBox({ project, selected }: ProjectBoxProps) {
+export function ProjectBox({ project, selected, index, onHover }: ProjectBoxProps) {
+    const [spawned, setSpawned] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+          setSpawned(true);
+        }, index * 480); 
+        return () => clearTimeout(timeout);
+      }, []);
+
+      
     return (
-      <div className="relative w-32 h-32">
-        <div
-          className={`w-32 h-32 bg-white transform-gpu transition-transform duration-300`}
-          style={{
-            transform: selected
-              ? 'rotateX(12deg) rotateY(-10deg) scale(1.1)' // tilt + slightly bigger when selected
-              : 'rotateX(5deg) rotateY(0deg) scale(1)',     // subtle tilt for unselected
-            boxShadow: selected
-              ? '8px 8px 16px rgba(0,0,0,0.8), inset -3px -3px 6px rgba(0,0,0,0.4), inset 3px 3px 6px rgba(255,255,255,0.4)'
-              : '5px 5px 10px rgba(0,0,0,0.7), inset -3px -3px 6px rgba(0,0,0,0.4), inset 3px 3px 6px rgba(255,255,255,0.4)',
-            backgroundImage: `url("${project.imagePath}")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        ></div>
+      <div className="relative w-32 h-32 cursor-pointer" onMouseEnter={() => onHover(index)}>
+      <div
+        className="
+          w-32 h-32 bg-white
+          transform-gpu
+          transition-all
+          duration-500
+          ease-out
+        "
+        style={{
+          transform: spawned
+            ? selected
+              ? 'translateY(0px) rotateX(12deg) rotateY(-10deg) scale(1.1)'
+              : 'translateY(0px) rotateX(5deg) rotateY(0deg) scale(1)'
+            : 'translateY(40px) scale(0.95)',   // START
+          opacity: spawned ? 1 : 0,             // FADE IN
+          boxShadow: selected
+            ? '8px 8px 16px rgba(0,0,0,0.8)'
+            : '5px 5px 10px rgba(0,0,0,0.7)',
+          backgroundImage: `url("${project.imagePath}")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      ></div>
   
         {selected && (
           <>
