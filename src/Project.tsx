@@ -14,7 +14,7 @@ export default function Project() {
     let [selectedIndex, setSelectedIndex] = useState(0);
     let { projectId } = useParams();
     let navigate = useNavigate();
-    const [isMuted, setIsMuted] = useState(() => {
+    const [isMuted] = useState(() => {
         const saved = localStorage.getItem("isMuted");
         return saved ? JSON.parse(saved) : true;
       });
