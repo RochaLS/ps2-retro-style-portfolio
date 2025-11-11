@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { ProjectBox } from './components/ProjectBox'
 import { projects } from './data/projects'
 import { crtSound, navSound, selectSound } from './data/sounds'
 
 import CRT from './components/CRT'
+import { useNavigate } from 'react-router'
+import { Navigation } from './components/Navigation'
 
-const textStyle = {
+export const textStyle = {
   fontFamily: 'Helvetica, Arial, sans-serif',
   fontWeight: 400,
-  color: '#FFFFFF',
   textShadow: `
     1px 1px 0 #000,
     -1px 1px 0 #000,
@@ -20,7 +21,7 @@ const textStyle = {
   letterSpacing: '0.05em', 
 };
 
-const textStyleSecondary = {
+export const textStyleSecondary = {
   fontFamily: 'Helvetica, Arial, sans-serif',
   fontWeight: 400,
   color: '#C8D952',
@@ -37,10 +38,17 @@ const textStyleSecondary = {
 function App() {
 
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(() => {
+    const saved = localStorage.getItem("isMuted");
+    return saved ? JSON.parse(saved) : true; // default true if not stored
+  });
   const [isLoading, setIsLoading] = useState(true)
+  let navigate = useNavigate();
+
+  const selectedRef = useRef(selectedIndex);
 
   useEffect(() => {
+    localStorage.setItem("isMuted", JSON.stringify(isMuted));
     const COLS = 5
     const handleKeyDown = (e: KeyboardEvent) => {
       console.log("Key pressed: ", e.key)
@@ -75,28 +83,41 @@ function App() {
             return next >= projects.length ? prev : next
           })
           break;
-
-        
         case "Enter":
           console.log('Selected item:', selectedIndex);
           if (!isMuted) selectSound.play()
+          navigate(`/project/${selectedRef.current}`)
           break;
       }
     }
 
+    const hasVisited = sessionStorage.getItem("hasVisited");
 
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
+    if (!hasVisited) {
+      // First time visiting
+      const timeout = setTimeout(() => {
+        setIsLoading(false);
+        sessionStorage.setItem("hasVisited", "true");
+        window.addEventListener('keydown', handleKeyDown);
+      }, projects.length * 480); 
+
+      //Cleanup
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        clearTimeout(timeout);
+      };
+    } else {
+      setIsLoading(false)
       window.addEventListener('keydown', handleKeyDown);
-    }, projects.length * 480); 
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
 
 
-    //Cleanup
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      clearTimeout(timeout);
-    };
   }, [isMuted])
+
+  useEffect(() => {
+    selectedRef.current = selectedIndex;
+  }, [selectedIndex]);
 
   return (
     <CRT>
@@ -132,15 +153,15 @@ function App() {
         <div className="flex justify-center align-center m-4">
           <div className="grid grid-cols-5 gap-16 my-0 mx-auto">
             {projects.map((project, index) => (
-              <ProjectBox project={project} selected={selectedIndex === index} index={index} onHover={(i) => { 
+              <ProjectBox key={index} project={project} selected={selectedIndex === index} index={index} onHover={(i) => { 
                 if (!isMuted) navSound.play();
                 setSelectedIndex(i); 
-              }}/>
+              }} isLoading={isLoading}/>
             ))}
           </div>
         </div>
-        <div className="text-white text-2xl p-12 absolute bottom-0 flex justify-between w-full tracking-tight" 
-              style={textStyle}>
+         <Navigation>
+          <>
           <button className="cursor-pointer" style={textStyle}  onClick={() => {
             if (isMuted) {
               setIsMuted(false)
@@ -153,9 +174,10 @@ function App() {
 
             }
           }}>[SOUND {isMuted ? "OFF": "ON"}]</button>
-          <p >USE [&lt;---] [---&gt;] TO NAVIGATE</p>
-          <p>[ENTER] CONFIRM</p>
-        </div>
+            <p >USE [&lt;---] [---&gt;] TO NAVIGATE</p>
+            <p>[ENTER] CONFIRM</p>
+          </>
+         </Navigation>
         {isLoading && (
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <p className="text-white text-5xl" style={textStyle}>Now loading...</p>
@@ -164,8 +186,6 @@ function App() {
 
         
       </div>
-      
-      
     </CRT>
     
   )

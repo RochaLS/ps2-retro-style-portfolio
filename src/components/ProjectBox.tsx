@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
 import type { Project } from "../data/projects";
+import { useNavigate } from "react-router";
 
 interface ProjectBoxProps {
     project: Project
     selected: boolean
     index: number
     onHover: (i: number) => void
+    isLoading: boolean
 }
 
 
 
-export function ProjectBox({ project, selected, index, onHover }: ProjectBoxProps) {
+export function ProjectBox({ project, selected, index, onHover, isLoading }: ProjectBoxProps) {
     const [spawned, setSpawned] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        const hasVisited = sessionStorage.getItem("hasVisited");
+
+        if (hasVisited) {
+            setSpawned(true);
+            return
+        }
         const timeout = setTimeout(() => {
           setSpawned(true);
         }, index * 480); 
@@ -22,7 +31,11 @@ export function ProjectBox({ project, selected, index, onHover }: ProjectBoxProp
 
       
     return (
-      <div className="relative w-32 h-32 cursor-pointer" onMouseEnter={() => onHover(index)}>
+      <div className="relative w-32 h-32 cursor-pointer" onMouseEnter={() => {
+        if (!isLoading) {
+            onHover(index)
+        }
+      }}>
       <div
         className="
           w-32 h-32 bg-white
@@ -30,6 +43,7 @@ export function ProjectBox({ project, selected, index, onHover }: ProjectBoxProp
           transition-all
           duration-500
           ease-out
+          rounded-md
         "
         style={{
           transform: spawned
@@ -44,6 +58,9 @@ export function ProjectBox({ project, selected, index, onHover }: ProjectBoxProp
           backgroundImage: `url("${project.imagePath}")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+        }}
+        onClick={() => {
+            navigate(`/project/${index}`)
         }}
       ></div>
   

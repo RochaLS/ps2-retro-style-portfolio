@@ -8,7 +8,7 @@ export default {
       extend: {
         fontFamily: {
           'ps2': ['Arial', 'Helvetica', 'sans-serif'],
-        },
+        }
       },
     },
     plugins: [],
