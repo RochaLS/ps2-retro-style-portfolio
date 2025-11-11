@@ -36,7 +36,7 @@ export const textStyleSecondary = {
 };
 
 function App() {
-
+  const isMobile = window.innerWidth < 768;
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [isMuted, setIsMuted] = useState(() => {
     const saved = localStorage.getItem("isMuted");
@@ -49,6 +49,11 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("isMuted", JSON.stringify(isMuted));
+
+    if (isMobile) {
+      setIsLoading(false); 
+      return; 
+    }
     const COLS = 5
     const handleKeyDown = (e: KeyboardEvent) => {
       console.log("Key pressed: ", e.key)
@@ -122,17 +127,17 @@ function App() {
   return (
     <CRT>
       <div className="min-h-screen bg-gradient-to-br from-stone-300 via-stone-500 to-stone-900">
-        <div className="flex justify-between w-full p-12">
-          <div>
-            <p className="font-ps2 text-4xl font-bold text-white tracking-tight"
+        <div className="flex flex-col sm:flex-row justify-between w-full p-6 sm:p-12">
+          <div className="text-center sm:text-left">
+            <p className="font-ps2 text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight"
               style={textStyle}>
               Memory Card [ps2/1]
             </p>
-            <p className="font-ps2 text-2xl font-normal text-gray-200 tracking-tight"
+            <p className="font-ps2 text-lg sm:text-xl md:text-2xl font-normal text-gray-200 tracking-tight"
               style={textStyle}>
               Lucas’s Full-Stack Portfolio
             </p>
-            <p className="font-ps2 text-2xl font-normal text-gray-200 tracking-tight"
+            <p className="font-ps2 text-base sm:text-lg md:text-2xl font-normal text-gray-200 tracking-tight"
               style={{ 
                 textShadow: `
                 1px 1px 0px #000,
@@ -146,39 +151,42 @@ function App() {
               733 KB Free
             </p>
           </div>
-          <div className="text-4xl font-black uppercase tracking-tight" style={textStyleSecondary}>
+          <div className="hidden sm:block text-4xl font-black uppercase tracking-tight" style={textStyleSecondary}>
             {projects[selectedIndex].title}
           </div>
         </div>
         <div className="flex justify-center align-center m-4">
-          <div className="grid grid-cols-5 gap-16 my-0 mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-10 md:gap-16">
             {projects.map((project, index) => (
               <ProjectBox key={index} project={project} selected={selectedIndex === index} index={index} onHover={(i) => { 
                 if (!isMuted) navSound.play();
                 setSelectedIndex(i); 
-              }} isLoading={isLoading}/>
+              }} isLoading={isLoading} isMuted={isMuted}/>
             ))}
           </div>
         </div>
-         <Navigation>
-          <>
-          <button className="cursor-pointer" style={textStyle}  onClick={() => {
-            if (isMuted) {
-              setIsMuted(false)
-              if (!crtSound.playing()) {
-                crtSound.play();
-              }
-            } else {
-              setIsMuted(true)
-              crtSound.stop();
-
-            }
-          }}>[SOUND {isMuted ? "OFF": "ON"}]</button>
-            <p >USE [&lt;---] [---&gt;] TO NAVIGATE</p>
-            <p>[ENTER] CONFIRM</p>
-          </>
-         </Navigation>
-        {isLoading && (
+        { !isMobile && (
+           <Navigation>
+           <>
+           <button className="cursor-pointer" style={textStyle}  onClick={() => {
+             if (isMuted) {
+               setIsMuted(false)
+               if (!crtSound.playing()) {
+                 crtSound.play();
+               }
+             } else {
+               setIsMuted(true)
+               crtSound.stop();
+ 
+             }
+           }}>[SOUND {isMuted ? "OFF": "ON"}]</button>
+             <p >USE [&lt;---] [---&gt;] TO NAVIGATE</p>
+             <p>[ENTER] CONFIRM</p>
+           </>
+          </Navigation>
+        )}
+        
+        {isLoading && !isMobile && (
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <p className="text-white text-5xl" style={textStyle}>Now loading...</p>
             </div>
@@ -187,7 +195,6 @@ function App() {
         
       </div>
     </CRT>
-    
   )
 }
 

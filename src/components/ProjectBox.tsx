@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Project } from "../data/projects";
 import { useNavigate } from "react-router";
+import { selectSound } from "../data/sounds";
 
 interface ProjectBoxProps {
     project: Project
@@ -8,11 +9,13 @@ interface ProjectBoxProps {
     index: number
     onHover: (i: number) => void
     isLoading: boolean
+    isMuted: boolean
 }
 
 
 
-export function ProjectBox({ project, selected, index, onHover, isLoading }: ProjectBoxProps) {
+export function ProjectBox({ project, selected, index, onHover, isLoading, isMuted }: ProjectBoxProps) {
+    const isMobile = window.innerWidth < 768; // same as Tailwind's md breakpoint
     const [spawned, setSpawned] = useState(false);
     const navigate = useNavigate();
 
@@ -36,35 +39,37 @@ export function ProjectBox({ project, selected, index, onHover, isLoading }: Pro
             onHover(index)
         }
       }}>
-      <div
+        <div
         className="
-          w-32 h-32 bg-white
-          transform-gpu
-          transition-all
-          duration-500
-          ease-out
-          rounded-md
+            w-32 h-32 bg-white
+            transform-gpu
+            transition-all
+            duration-500
+            ease-out
+            rounded-md
         "
         style={{
-          transform: spawned
-            ? selected
-              ? 'translateY(0px) rotateX(12deg) rotateY(-10deg) scale(1.1)'
-              : 'translateY(0px) rotateX(5deg) rotateY(0deg) scale(1)'
-            : 'translateY(40px) scale(0.95)',   // START
-          opacity: spawned ? 1 : 0,             // FADE IN
-          boxShadow: selected
+            transform: spawned
+            ? selected && !isMobile
+                ? 'translateY(0px) rotateX(12deg) rotateY(-10deg) scale(1.1)'
+                : 'translateY(0px) scale(1)'
+            : isMobile
+                ? 'scale(1)' // no spawn animation on mobile
+                : 'translateY(40px) scale(0.95)',
+            opacity: spawned || isMobile ? 1 : 0, // instantly visible on mobile
+            boxShadow: selected && !isMobile
             ? '8px 8px 16px rgba(0,0,0,0.8)'
             : '5px 5px 10px rgba(0,0,0,0.7)',
-          backgroundImage: `url("${project.imagePath}")`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+            backgroundImage: `url("${project.imagePath}")`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
         }}
         onClick={() => {
-            navigate(`/project/${index}`)
+            if (!isMuted) selectSound.play()
+            navigate(`/project/${index}`);
         }}
-      ></div>
-  
-        {selected && (
+        ></div>
+        {selected && !isMobile && (
           <>
             {/* Solid white core */}
             <div

@@ -10,6 +10,7 @@ import { navSound, selectSound } from "./data/sounds";
 
 
 export default function Project() {
+    const isMobile = window.innerWidth < 768; 
     let [selectedIndex, setSelectedIndex] = useState(0);
     let { projectId } = useParams();
     let navigate = useNavigate();
@@ -19,6 +20,10 @@ export default function Project() {
       });
 
       useEffect(() => {
+        if (isMobile) {
+            return; 
+          }
+
         const handleKeyDown = (e: KeyboardEvent) => {
           console.log("Key pressed: ", e.key)
     
@@ -70,7 +75,7 @@ export default function Project() {
     return (
         <CRT>
             <div className="min-h-screen bg-gradient-to-br from-stone-300 via-stone-500 to-stone-900
-                            flex justify-center items-center gap-36">
+                flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-36 px-6 py-8">
 
                 <div className="flex justify-center flex-col">
                     <ProjectDetailsBox project={projects[Number(projectId)]} />
@@ -78,11 +83,14 @@ export default function Project() {
                     {projects[Number(projectId)].repoUrl && (
                 <a
                     className={`text-center mt-12 font-ps2 text-2xl transition-colors duration-300 ${
-                    selectedIndex === 0 ? "text-[#7bc9ff]" : "text-white hover:text-[#7bc9ff]"
+                    selectedIndex === 0 && !isMobile ? "text-[#7bc9ff]" : "text-white hover:text-[#7bc9ff]"
                     }`}
                     href={projects[Number(projectId)].repoUrl}
                     target="_blank"
                     style={textStyle}
+                    onClick={() => {
+                        if (!isMuted) selectSound.play();
+                    }}
                 >
                     [See Repository]
                 </a>
@@ -91,11 +99,14 @@ export default function Project() {
                 {projects[Number(projectId)].prodUrl && (
                 <a
                     className={`text-center font-ps2 text-2xl transition-colors duration-300 ${
-                    selectedIndex === 1 ? "text-[#7bc9ff]" : "text-white hover:text-[#7bc9ff]"
+                    selectedIndex === 1 && !isMobile ? "text-[#7bc9ff]" : "text-white hover:text-[#7bc9ff]"
                     }`}
                     href={projects[Number(projectId)].prodUrl}
                     target="_blank"
                     style={textStyle}
+                    onClick={() => {
+                        if (!isMuted) selectSound.play();
+                    }}
                 >
                     [See it Live]
                 </a>
@@ -104,11 +115,14 @@ export default function Project() {
                 {projects[Number(projectId)].linkedinUrl && (
                 <a
                     className={`text-center mt-12 font-ps2 text-2xl transition-colors duration-300 ${
-                    selectedIndex === 0 ? "text-[#7bc9ff]" : "text-white hover:text-[#7bc9ff]"
+                    selectedIndex === 0 && !isMobile ? "text-[#7bc9ff]" : "text-white hover:text-[#7bc9ff]"
                     }`}
                     href={projects[Number(projectId)].linkedinUrl}
                     target="_blank"
                     style={textStyle}
+                    onClick={() => {
+                        if (!isMuted) selectSound.play();
+                    }}
                 >
                     [See Linkedin]
                 </a>
@@ -117,37 +131,46 @@ export default function Project() {
                 {projects[Number(projectId)].githubUrl && (
                 <a
                     className={`text-center font-ps2 text-2xl transition-colors duration-300 ${
-                    selectedIndex === 1 ? "text-[#7bc9ff]" : "text-white hover:text-[#7bc9ff]"
+                    selectedIndex === 1 && !isMobile ? "text-[#7bc9ff]" : "text-white hover:text-[#7bc9ff]"
                     }`}
                     href={projects[Number(projectId)].githubUrl}
                     target="_blank"
                     style={textStyle}
+                    onClick={() => {
+                        if (!isMuted) selectSound.play();
+                    }}
                 >
                     [See Github]
                 </a>
                 )}
                 </div>
 
-                    <div className="max-w-xl">
-                        <p className="font-ps2 text-3xl text-white text-center" style={textStyle}>Memory Card [ps2/1]</p>
-                        <p className="text-4xl font-black text-center mt-6" style={textStyleSecondary}>{projects[Number(projectId)].title}</p>
-                        <p className="font-ps2 text-xl text-white tracking-tight mt-6" style={textStyle}>
+                    <div className="max-w-xl px-4 sm:px-0 text-center lg:text-left">
+                        <p className="hidden sm:block font-ps2 text-2xl sm:text-3xl text-white text-center lg:text-left" style={textStyle}>Memory Card [ps2/1]</p>
+                        <p className="text-2xl sm:text-3xl md:text-4xl font-black text-center lg:text-left mt-2 sm:mt-6" style={textStyleSecondary}>{projects[Number(projectId)].title}</p>
+                        <p className="font-ps2 text-base sm:text-lg lg:text-xl text-white tracking-tight mt-4 sm:mt-6 leading-relaxed text-center lg:text-left px-2 sm:px-0" style={textStyle}>
                         {projects[Number(projectId)].description}
                         </p>
-                        <div className="flex gap-4 justify-center mt-12">
+                        <div className="flex flex-wrap gap-5 sm:gap-6 justify-center lg:justify-start mt-10 sm:mt-12 px-6 sm:px-2 lg:px-0 pb-8" >
                             {projects[Number(projectId)].techStack?.map((tech, index) => (
                                 <TechStackBox key={index} imagePath={`/${tech}-logo.png`} />
                             ))}
                         </div>
                     
                     </div>
-                    <Navigation>
-                        <>
-                            <p className="cursor-pointer" onClick={() => {
-                                navigate("/")
-                            }}> [ESC] BACK TO MENU</p>
-                        </>
-                    </Navigation>
+                    {!isMobile && (
+                        <Navigation>
+                            <>
+                                <p className="cursor-pointer" onClick={() => {
+                                    if (!isMuted) selectSound.play();
+                                    navigate("/");
+                                }}> [ESC] BACK TO MENU</p>
+
+                                <p >USE [UP] AND [DOWN] ARROWS TO NAVIGATE</p>
+                            </>
+                        </Navigation>
+                    )}
+
             </div>
         </CRT>
       )
