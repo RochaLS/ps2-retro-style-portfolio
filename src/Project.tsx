@@ -43,7 +43,7 @@ export default function Project() {
                 setSelectedIndex(prev => Math.min(1, prev + 1))
                 console.log(selectedIndex)
                 break;
-            case "Enter":
+            case "z":
                 if (!isMuted) selectSound.play();
                 if (selectedIndex === 0) {
                     if (Number(projectId) === 7) {
@@ -91,6 +91,7 @@ export default function Project() {
                     onClick={() => {
                         if (!isMuted) selectSound.play();
                     }}
+                    aria-label={`View ${projects[Number(projectId)].title} source code on GitHub`}
                 >
                     [See Repository]
                 </a>
@@ -107,6 +108,7 @@ export default function Project() {
                     onClick={() => {
                         if (!isMuted) selectSound.play();
                     }}
+                    aria-label={`View ${projects[Number(projectId)].title} live.`}
                 >
                     [See it Live]
                 </a>
@@ -123,6 +125,7 @@ export default function Project() {
                     onClick={() => {
                         if (!isMuted) selectSound.play();
                     }}
+                    aria-label="Go to Lucas's Linkedin"
                 >
                     [See Linkedin]
                 </a>
@@ -139,6 +142,7 @@ export default function Project() {
                     onClick={() => {
                         if (!isMuted) selectSound.play();
                     }}
+                    aria-label="Go to Lucas's Github profile page"
                 >
                     [See Github]
                 </a>
@@ -167,6 +171,7 @@ export default function Project() {
                                 }}> [ESC] BACK TO MENU</p>
 
                                 <p >USE [UP] AND [DOWN] ARROWS TO NAVIGATE</p>
+                                <p>[Z] CONFIRM</p>
                             </>
                         </Navigation>
                     )}

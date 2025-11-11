@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import './App.css'
 import { ProjectBox } from './components/ProjectBox'
 import { projects } from './data/projects'
 import { crtSound, navSound, selectSound } from './data/sounds'
@@ -88,7 +87,7 @@ function App() {
             return next >= projects.length ? prev : next
           })
           break;
-        case "Enter":
+        case "z":
           console.log('Selected item:', selectedIndex);
           if (!isMuted) selectSound.play()
           navigate(`/project/${selectedRef.current}`)
@@ -129,14 +128,14 @@ function App() {
       <div className="min-h-screen bg-gradient-to-br from-stone-300 via-stone-500 to-stone-900">
         <div className="flex flex-col sm:flex-row justify-between w-full p-6 sm:p-12">
           <div className="text-center sm:text-left">
-            <p className="font-ps2 text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight"
+            <h1 className="font-ps2 text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight"
               style={textStyle}>
               Memory Card [ps2/1]
-            </p>
-            <p className="font-ps2 text-lg sm:text-xl md:text-2xl font-normal text-gray-200 tracking-tight"
+            </h1>
+            <h2 className="font-ps2 text-lg sm:text-xl md:text-2xl font-normal text-gray-200 tracking-tight"
               style={textStyle}>
               Lucas’s Full-Stack Portfolio
-            </p>
+            </h2>
             <p className="font-ps2 text-base sm:text-lg md:text-2xl font-normal text-gray-200 tracking-tight"
               style={{ 
                 textShadow: `
@@ -179,9 +178,11 @@ function App() {
                crtSound.stop();
  
              }
-           }}>[SOUND {isMuted ? "OFF": "ON"}]</button>
+           }}
+           aria-label="Toggle sound"
+           >[SOUND {isMuted ? "OFF": "ON"}]</button>
              <p >USE [&lt;---] [---&gt;] TO NAVIGATE</p>
-             <p>[ENTER] CONFIRM</p>
+             <p>[Z] CONFIRM</p>
            </>
           </Navigation>
         )}

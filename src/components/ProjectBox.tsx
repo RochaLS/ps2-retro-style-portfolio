@@ -34,7 +34,7 @@ export function ProjectBox({ project, selected, index, onHover, isLoading, isMut
 
       
     return (
-      <div className="relative w-32 h-32 cursor-pointer" onMouseEnter={() => {
+      <div className="relative w-32 h-32 cursor-pointer" aria-label={`Open ${project.title} project details`} onMouseEnter={() => {
         if (!isLoading) {
             onHover(index)
         }
@@ -69,6 +69,12 @@ export function ProjectBox({ project, selected, index, onHover, isLoading, isMut
             navigate(`/project/${index}`);
         }}
         ></div>
+        {/* IMG is hidden. Only used for screen readers to see the alt */}
+          {/* <img
+            src={project.imagePath}
+            alt={`Screenshot of ${project.title}`}
+            className="absolute inset-0 opacity-0"
+        /> */}
         {selected && !isMobile && (
           <>
             {/* Solid white core */}
