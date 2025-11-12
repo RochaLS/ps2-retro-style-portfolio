@@ -125,7 +125,7 @@ function App() {
 
   return (
     <CRT>
-      <div className="min-h-[100dvh] bg-gradient-to-br from-stone-300 via-stone-500 to-stone-900">
+      <div className="min-h-screen bg-gradient-to-br from-stone-300 via-stone-500 to-stone-900">
         <div className="flex flex-col sm:flex-row justify-between w-full p-6 sm:p-12">
           <div className="text-center sm:text-left">
             <h1 className="font-ps2 text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight"
