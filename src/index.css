@@ -12,11 +12,5 @@
 html, body, #root {
   height: 100%;
   min-height: 100%;
-  margin: 0;
-  padding: 0;
-
-  /* EXACT SAME GRADIENT as Tailwind */
-  background: linear-gradient(to bottom right, #d6d3d1, #78716c, #1c1917);
-
-  background-attachment: fixed; /* helps Safari */
+  background: #000; 
 }
