@@ -74,7 +74,7 @@ export default function Project() {
 
     return (
         <CRT>
-            <div className="min-h-screen bg-gradient-to-br from-stone-300 via-stone-500 to-stone-900
+            <div className="min-h-[100dvh] bg-gradient-to-br from-stone-300 via-stone-500 to-stone-900
                 flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-36 px-6 py-8">
 
                 <div className="flex justify-center flex-col">
