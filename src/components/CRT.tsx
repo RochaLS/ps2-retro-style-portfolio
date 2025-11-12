@@ -6,5 +6,5 @@ interface CRTProps {
   }
 
 export default function CRT({ children }: CRTProps) {
-  return <div className="crt relative overflow-hidden min-h-[100dvh]">{children}</div>;
+  return <div className="crt relative overflow-hidden">{children}</div>;
 }
