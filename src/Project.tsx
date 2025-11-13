@@ -72,6 +72,15 @@ export default function Project() {
           };
     })
 
+    useEffect(() => {
+        projects.forEach(project => {
+          project.techStack?.forEach(tech => {
+            const img = new Image();
+            img.src = `/${tech}-logo.webp`;
+          });
+        });
+      }, []);
+
     return (
         <CRT>
             <div className="min-h-screen bg-gradient-to-br from-stone-300 via-stone-500 to-stone-900
@@ -157,7 +166,7 @@ export default function Project() {
                         </p>
                         <div className="flex flex-wrap gap-5 sm:gap-6 justify-center lg:justify-start mt-10 sm:mt-12 px-6 sm:px-2 lg:px-0 pb-8" >
                             {projects[Number(projectId)].techStack?.map((tech, index) => (
-                                <TechStackBox key={index} imagePath={`/${tech}-logo.png`} />
+                                <TechStackBox key={index} imagePath={`/${tech}-logo.webp`} />
                             ))}
                         </div>
                     
