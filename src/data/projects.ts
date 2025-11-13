@@ -15,7 +15,7 @@ export const projects: Project[] = [
     {   
         id: 0,
         title: "Baito", 
-        description: "Baito helps part-time workers stay on top of their shifts and earnings with AI-powered schedule imports, calendar sync, and sleek home screen widgets.", 
+        description: "Baito is an iOS app that helps part-time workers stay on top of their shifts and earnings with AI-powered schedule imports, calendar sync, and sleek home screen widgets.", 
         imagePath: "/baito-logo.webp", 
         techStack: ["swift", "java", "springboot", "mysql"], 
         repoUrl: "https://github.com/RochaLS/MyArubaitoDashboard", 
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     { 
         id: 7, 
         title: "About Me", 
-        description: "I’m a developer with a product-first mindset, passionate about building tools that simplify and improve people’s lives including my own. I love turning ideas into polished, user-focused products that blend design and functionality. With experience across Java (Spring Boot), JavaScript (React, Next.js, Node.js), and Swift, I enjoy exploring every layer of development. Outside of coding, you’ll probably find me gaming or studying Japanese.", 
+        description: "I’m a developer with a product-first mindset, passionate about building tools that simplify and improve people’s lives including my own. I love turning ideas into polished, user-focused products that blend design and functionality. With experience across Java (Spring Boot), JavaScript (React, Next.js, Node.js), and Swift, I enjoy exploring every layer of development. Outside of coding, you’ll probably find me gaming, planning my next trip or studying Japanese.", 
         imagePath: "/me.webp",
         linkedinUrl: "https://www.linkedin.com/in/lucas-srocha/",
         githubUrl: "https://github.com/RochaLS"
