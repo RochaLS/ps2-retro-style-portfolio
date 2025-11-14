@@ -49,10 +49,10 @@ export const projects: Project[] = [
     },
     { 
         id: 4, 
-        title: "Roomies Share", 
+        title: "Roomies Pay", 
         description: "A web app for roommates to share their expenses in an easy and clean way.", 
         imagePath: "/roomies-pay.webp", 
-        techStack: ["react", "mongo-db"], 
+        techStack: ["react", "typescript"], 
         repoUrl: "https://github.com/RochaLS/roomies-share" 
     },
     { 
@@ -74,6 +74,14 @@ export const projects: Project[] = [
     },
     { 
         id: 7, 
+        title: "This Portfolio", 
+        description: "This portfolio is heavily inspired by the PlayStation 2 Memory Card interface, one of the most iconic menus in gaming history. I wanted my portfolio to feel fun, nostalgic, and personal — something that blends my love for gaming and design while still showcasing my software development projects.", 
+        imagePath: "/portfolio-logo.webp",
+        techStack: ["react", "typescript", "tailwind"], 
+        repoUrl: "https://github.com/RochaLS/ps2-retro-style-portfolio" 
+    },
+    { 
+        id: 8, 
         title: "About Me", 
         description: "I’m a developer with a product-first mindset, passionate about building tools that simplify and improve people’s lives including my own. I love turning ideas into polished, user-focused products that blend design and functionality. With experience across Java (Spring Boot), JavaScript (React, Next.js, Node.js), and Swift, I enjoy exploring every layer of development. Outside of coding, you’ll probably find me gaming, planning my next trip or studying Japanese.", 
         imagePath: "/me.webp",
