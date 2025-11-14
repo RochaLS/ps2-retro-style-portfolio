@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# 🎮 PS2-Style Developer Portfolio  
+**A nostalgic PlayStation 2–inspired portfolio built with React + Vite + Tailwind.**  
+A tribute to childhood gaming — memory card UI, CRT effects, PS2 sounds, retro icons, and smooth controller-style navigation.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## ⭐ About This Project  
+This portfolio is heavily inspired by the **PlayStation 2 Memory Card interface**, one of the most iconic menus in gaming history.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I wanted my portfolio to feel fun, nostalgic, and personal — something that blends my love for gaming and design while still showcasing my software development projects.
 
-## React Compiler
+The result?  
+A fully interactive retro UI featuring:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🎚 CRT filter  
+- 🎵 Authentic PS2 sound effects  
+- 🎞 Smooth 3D-style animations  
+- 🎮 Arrow-key navigation  
+- 💾 Memory-card-style project grid  
+- 🟦 Pixelated retro tech logos  
+- 🌌 Soft PS2-style gradients & glows  
 
-## Expanding the ESLint configuration
+Built entirely with modern web technologies.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🖥️ Screenshots  
+![UI Screenshot](https://github.com/RochaLS/ps2-retro-style-portfolio/raw/master/portfolio-prev.png)
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tech Stack  
+### **Frontend**
+- React  
+- Vite  
+- TypeScript  
+- Tailwind CSS  
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### **UI / Effects**
+- CSS CRT filter  
+- Custom PS2-style gradients  
+- Pixel art logos (manually created)  
+- Audio API for sound effects  
+- Keyboard navigation logic  
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### **Other**
+- Deployed on Vercel  
+- Optimized for mobile and desktop  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🎮 Core Features  
+
+### 🎞 PS2 Memory Card Grid  
+Projects are displayed as “memory card icons,” complete with hovering animations and selection states.
+
+### 🎮 Full Keyboard Navigation  
+- Arrow keys to navigate between projects  
+- Enter to select  
+- Escape to return  
+- Sound effects for movements and selections
+
+### 📺 Authentic CRT Effect  
+A subtle scanline and glow filter overlay that recreates the classic TV look.
+
+### 🎨 Retro Pixelated Tech Logos  
+Custom pixelated icons for:
+- React  
+- JavaScript  
+- Spring Boot  
+- Swift  
+- Node.js  
+- HTML / CSS  
+- …and more
+
+All matching the PS2 aesthetic.
+
+### 🔊 PS2 Sound Effects  
+- Navigation beeps  
+- Selection “click”  
+- Soft background hum (optional)
+
