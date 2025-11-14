@@ -75,7 +75,7 @@ export const projects: Project[] = [
     { 
         id: 7, 
         title: "This Portfolio", 
-        description: "This portfolio is heavily inspired by the PlayStation 2 Memory Card interface, one of the most iconic menus in gaming history. I wanted my portfolio to feel fun, nostalgic, and personal — something that blends my love for gaming and design while still showcasing my software development projects.", 
+        description: "This portfolio is heavily inspired by the PlayStation 2 Memory Card interface, one of the most iconic menus in gaming history. I wanted my portfolio to feel fun, nostalgic, and personal, something that blends my love for gaming and design while still showcasing my software development projects.", 
         imagePath: "/portfolio-logo.webp",
         techStack: ["react", "typescript", "tailwind"], 
         repoUrl: "https://github.com/RochaLS/ps2-retro-style-portfolio" 
