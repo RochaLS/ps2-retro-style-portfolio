@@ -34,7 +34,7 @@ Built entirely with modern web technologies.
 ### **UI / Effects**
 - CSS CRT filter  
 - Custom PS2-style gradients  
-- Pixel art logos (manually created)  
+- Pixel art logos  
 - Audio API for sound effects  
 - Keyboard navigation logic  
 
