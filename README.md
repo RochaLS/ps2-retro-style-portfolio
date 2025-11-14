@@ -2,8 +2,6 @@
 **A nostalgic PlayStation 2–inspired portfolio built with React + Vite + Tailwind.**  
 A tribute to childhood gaming — memory card UI, CRT effects, PS2 sounds, retro icons, and smooth controller-style navigation.
 
----
-
 ## ⭐ About This Project  
 This portfolio is heavily inspired by the **PlayStation 2 Memory Card interface**, one of the most iconic menus in gaming history.  
 
@@ -22,11 +20,9 @@ A fully interactive retro UI featuring:
 
 Built entirely with modern web technologies.
 
----
 
 ## 🖥️ Screenshots  
 ![UI Screenshot](https://github.com/RochaLS/ps2-retro-style-portfolio/raw/master/portfolio-prev.png)
----
 
 ## 🛠️ Tech Stack  
 ### **Frontend**
