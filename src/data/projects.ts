@@ -18,7 +18,7 @@ export const projects: Project[] = [
         description: "Baito is an iOS app that helps part-time workers stay on top of their shifts and earnings with AI-powered schedule imports, calendar sync, and sleek home screen widgets.", 
         imagePath: "/baito-logo.webp", 
         techStack: ["swift", "java", "springboot", "mysql"], 
-        repoUrl: "https://github.com/RochaLS/MyArubaitoDashboard", 
+        repoUrl: "https://github.com/RochaLS/myarubaito-ios", 
         prodUrl: "https://baito.app" 
     },
     {  
